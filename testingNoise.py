@@ -1,4 +1,3 @@
-from venv import create
 from noisyPattern import noisyPattern 
 import random as rdn
 import numpy as np
