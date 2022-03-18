@@ -8,7 +8,7 @@ class noisyPattern:
         self.setLines()
  
     def setLines(self):
-        self.image[:,0:16]=0
+        self.image[:,0:16]=0 #sets ALL y elements in x positions 0->16 = 0
         self.image[:,32:48]=0
         self.image[:,64:80]=0
         plt.imsave('lines.png', self.image, cmap=plt.cm.gray)

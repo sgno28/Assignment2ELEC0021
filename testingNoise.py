@@ -29,7 +29,7 @@ def findMaj(A):
 
 def main():
     createImg()
-
+    
     array1 = createArray()
     array2 = createArray()
     array3 = createArray()
