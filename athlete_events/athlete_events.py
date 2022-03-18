@@ -1,10 +1,10 @@
-from turtle import color
 import matplotlib.pyplot as plt
 import pandas as pd
 
 def print_menu():
+    print("==========================================")
     print("Please, enter the numbers of the filters you would like to use (e.g. 234 if you want to filter by age, team and year):")
-    print("1.Sex\n2.Age\n3.Team\n4.Year\n5.Sport")
+    print("1.Sex\n2.Age\n3.Team\n4.Year\n5.Sport\n")
 
 def get_menu_choice():
     choice = input("> ")
@@ -111,10 +111,12 @@ def main():
     print_menu() 
     choice_list = get_menu_choice() #gets a list of the users desired filter (columns) choices
     f_df, df_l = filtering(df, choice_list)
+    print("==========================================")
     if df_l != 0:
         plotting(f_df, df_l)
     else:
         print("Nothing to plot\nProgram terminating")
+    print("==========================================")
 
 if __name__ == "__main__":
     main()
