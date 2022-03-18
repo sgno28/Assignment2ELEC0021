@@ -41,8 +41,8 @@ def validate_choice(choice_list):
             while flag:
                 flag = False
                 sex = input("Enter 'F' for female, 'M' for male: ")
-
-                if sex.title() != 'F' and sex.title() != 'M':
+                sex = sex.title()
+                if sex != 'F' and sex != 'M':
                     print("Invalid input")
                     flag = True
 
@@ -61,7 +61,8 @@ def validate_choice(choice_list):
 
         elif choice == '3':
             team = input("Please enter the team/country: ")
-            team = team.lower().title()
+            team = team.lower() #format string to all lowercase
+            team = team.title() #format string to capitilize first letter of each word
             choice_dict.update({"Team": team})
         
         elif choice == '4':
@@ -77,7 +78,8 @@ def validate_choice(choice_list):
 
         elif choice == '5':
             sport = input("Please enter the sport: ")
-            sport = sport.lower().title()
+            sport = sport.lower() #format string to all lowercase
+            sport = sport.title() #format string to capitilize first letter of each word
             choice_dict.update({"Sport": sport})
 
     return choice_dict
@@ -89,9 +91,7 @@ def filtering(df, choice_list):
         return filtered_df, len(filtered_df)
     else:
         print("No records found")
-        return 0
-
-    
+        return 0, 0
 
 def plotting(f_df, df_length):
     print(f"{df_length} records found.")
@@ -101,8 +101,8 @@ def plotting(f_df, df_length):
         print("File scatter.png saved")
     
     elif df_length >= 100:
-        #12 bins
-        plt.hist(f_df['Weight'], 12)
+        bins = 12
+        plt.hist(f_df['Weight'], bins)
         plt.savefig('hist.png')
         print("File hist.png has been saved.")
 
