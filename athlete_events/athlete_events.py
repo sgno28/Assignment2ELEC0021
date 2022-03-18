@@ -69,7 +69,7 @@ def validate_choice(choice_list):
             while flag:
                 flag = False
                 try:
-                    year = input("Please enter the year of the Olympic: ")
+                    year = input("Please enter the year of the games: ")
                     year = int(year)
                     choice_dict.update({"Year": year})
                 except ValueError:
