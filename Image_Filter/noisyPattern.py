@@ -1,5 +1,3 @@
-from cmath import pi
-from re import L
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -32,12 +30,11 @@ class noisyPattern:
         else:
             return 255
 
-
     def removeNoise(self):
         noise_removed = np.copy(self.image) #make object copy of original image with noise so that I can work on the original image without changing it as I go
 
         rows = self.image.shape[0]
-        cols = self.image.shape[1]
+        cols = self.image.shape[1] #get number of rows and colums of the image array
 
         whitePixels = np.where(self.image == 255) #find the indexes of all instances of white pixels in noisy image
         wp_coords = list(zip(whitePixels[0], whitePixels[1])) #zip the two arrays together to get their indexs in coords format
@@ -49,12 +46,23 @@ class noisyPattern:
                 if maj == 0:
                     noise_removed[i, j] = 0 #if majority is black then change the pixel to black 
 
-        self.image = noise_removed #reassign the image to the final noise removed image
-        plt.imsave("noise_removed.png", self.image, cmap = plt.cm.gray) #plot new image
+        plt.imsave("noise_removed.png", noise_removed, cmap = plt.cm.gray) #plot new image
+    
+    def __find_avg(self, i, j):
+        temp_array = self.image[i-1:i+2, j-1:j+2] #create temporary array of the surrounding pixels
+        sum = temp_array.sum() - 255 #sums every element in the array and minus the middle pixel
+        avg = sum / 8 #gets majority sum of pixels
+        return round(avg)
 
     def filter1(self):
-        #your code here
-        #replace the value of every pixel by the average of the values
-        #of its neighbouring pixels
-        #save the resulting image in file pattern_filter1.pn
-        pass
+        #blur_filter = np.copy(self.image)
+
+        rows = self.image.shape[0]
+        cols = self.image.shape[1]  #get number of rows and colums of the image array
+
+        for i in range(1, rows - 2):
+            for j in range(1, cols - 2): #iterate through each pixel that are NOT on the borders
+                avg = self.__find_avg(i, j ) #returns the avg of the surrounding pixels
+                self.image[i, j] = avg #replace the pixel with the mean of the pixels around it
+
+        plt.imsave("pattern_filter1.png", self.image, cmap = plt.cm.gray) #plot new image
